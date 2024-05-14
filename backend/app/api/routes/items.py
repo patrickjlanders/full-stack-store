@@ -50,19 +50,19 @@ def read_items(
 
 @router.get("/summary", response_model=ItemSummary)
 def read_summary(
-    session: SessionDep, current_user: CurrentUser, skip: int = 0, limit: int = 100
+    session: SessionDep, current_user: CurrentUser
 ) -> Any:
     """
     Retrieve Summary Total.
     """
 
 
-    sum_statement = (
+    sum_statement: Any = (
         select(func.sum(Item.price))
         .select_from(Item)
         .where(Item.owner_id == current_user.id)
     )
-    sum = session.exec(sum_statement).one()
+    sum  = session.exec(sum_statement).one()
     return ItemSummary(message="Total Cost", sum=sum)
 
 
