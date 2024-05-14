@@ -45,7 +45,7 @@ project
 
 These are there shortcuts used for this project:
 
- - [**FastAPI full stack template**](https://fastapi.tiangolo.com/project-generation/) to get the main structure of what the project needs
+ - [**FastAPI full stack template**](https://fastapi.tiangolo.com/project-generation/){:target="_blank"}  to get the main structure of what the project needs
 
     - Backend Web framework: FastApi - Python framework
     - Front End: React - Generated using openApi
