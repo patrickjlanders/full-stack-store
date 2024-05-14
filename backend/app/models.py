@@ -100,6 +100,7 @@ class ItemSummary(SQLModel):
     message: str
     sum: int
 
+
 # Generic message
 class Message(SQLModel):
     message: str
