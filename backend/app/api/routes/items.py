@@ -4,7 +4,15 @@ from fastapi import APIRouter, HTTPException
 from sqlmodel import func, select
 
 from app.api.deps import CurrentUser, SessionDep
-from app.models import Item, ItemCreate, ItemPublic, ItemsPublic, ItemUpdate, Message
+from app.models import (
+    Item,
+    ItemCreate,
+    ItemPublic,
+    ItemsPublic,
+    ItemSummary,
+    ItemUpdate,
+    Message,
+)
 
 router = APIRouter()
 
@@ -24,7 +32,7 @@ def read_items(
         items = session.exec(statement).all()
     else:
         count_statement = (
-            select(func.count())
+            select(func.su())
             .select_from(Item)
             .where(Item.owner_id == current_user.id)
         )
@@ -38,6 +46,24 @@ def read_items(
         items = session.exec(statement).all()
 
     return ItemsPublic(data=items, count=count)
+
+
+@router.get("/summary", response_model=ItemSummary)
+def read_summary(
+    session: SessionDep, current_user: CurrentUser, skip: int = 0, limit: int = 100
+) -> Any:
+    """
+    Retrieve Summary Total.
+    """
+
+
+    sum_statement = (
+        select(func.sum(Item.price))
+        .select_from(Item)
+        .where(Item.owner_id == current_user.id)
+    )
+    sum = session.exec(sum_statement).one()
+    return ItemSummary(message="Total Cost", sum=sum)
 
 
 @router.get("/{id}", response_model=ItemPublic)

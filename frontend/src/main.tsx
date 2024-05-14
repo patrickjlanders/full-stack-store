@@ -6,7 +6,7 @@ import { routeTree } from "./routeTree.gen"
 
 import { StrictMode } from "react"
 import { OpenAPI } from "./client"
-import theme from "./theme"
+import {themeBrit} from "./theme"
 
 OpenAPI.BASE = import.meta.env.VITE_API_URL
 OpenAPI.TOKEN = async () => {
@@ -24,7 +24,7 @@ declare module "@tanstack/react-router" {
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ChakraProvider theme={theme}>
+    <ChakraProvider theme={themeBrit}>
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
       </QueryClientProvider>

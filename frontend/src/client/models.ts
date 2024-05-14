@@ -18,6 +18,7 @@ export type HTTPValidationError = {
 export type ItemCreate = {
 	title: string;
 	description?: string | null;
+	price?: number | null;
 };
 
 
@@ -25,8 +26,16 @@ export type ItemCreate = {
 export type ItemPublic = {
 	title: string;
 	description?: string | null;
+	price?: number | null;
 	id: number;
 	owner_id: number;
+};
+
+
+
+export type ItemSummary = {
+	message: string;
+	sum: number;
 };
 
 
@@ -34,6 +43,7 @@ export type ItemPublic = {
 export type ItemUpdate = {
 	title?: string | null;
 	description?: string | null;
+	price?: number | null;
 };
 
 

@@ -103,6 +103,15 @@ const EditItem = ({ item, isOpen, onClose }: EditItemProps) => {
                 type="text"
               />
             </FormControl>
+            <FormControl mt={4}>
+              <FormLabel htmlFor="price">Price</FormLabel>
+              <Input
+                id="price"
+                {...register("price")}
+                placeholder="Price"
+                type="float"
+              />
+            </FormControl> 
           </ModalBody>
           <ModalFooter gap={3}>
             <Button

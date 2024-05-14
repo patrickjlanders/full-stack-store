@@ -7,15 +7,12 @@ import {
   DrawerOverlay,
   Flex,
   IconButton,
-  Image,
   Text,
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react"
 import { useQueryClient } from "@tanstack/react-query"
 import { FiLogOut, FiMenu } from "react-icons/fi"
-
-import Logo from "../../assets/images/fastapi-logo.svg"
 import type { UserPublic } from "../../client"
 import useAuth from "../../hooks/useAuth"
 import SidebarItems from "./SidebarItems"
@@ -52,7 +49,7 @@ const Sidebar = () => {
           <DrawerBody py={8}>
             <Flex flexDir="column" justify="space-between">
               <Box>
-                <Image src={Logo} alt="logo" p={6} />
+                {/* <Image src={Logo} alt="logo" p={6} /> */}
                 <SidebarItems onClose={onClose} />
                 <Flex
                   as="button"
@@ -93,7 +90,6 @@ const Sidebar = () => {
           borderRadius={12}
         >
           <Box>
-            <Image src={Logo} alt="Logo" w="180px" maxW="2xs" p={6} />
             <SidebarItems />
           </Box>
           {currentUser?.email && (

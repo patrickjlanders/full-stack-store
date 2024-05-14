@@ -1,4 +1,5 @@
 import {
+  Button,
   Container,
   Flex,
   Heading,
@@ -12,7 +13,7 @@ import {
   Tr,
 } from "@chakra-ui/react"
 import { useSuspenseQuery } from "@tanstack/react-query"
-import { createFileRoute } from "@tanstack/react-router"
+import { createFileRoute, useNavigate } from "@tanstack/react-router"
 
 import { Suspense } from "react"
 import { ErrorBoundary } from "react-error-boundary"
@@ -39,6 +40,9 @@ function ItemsTableBody() {
           <Td color={!item.description ? "ui.dim" : "inherit"}>
             {item.description || "N/A"}
           </Td>
+          <Td color={!item.price ? "ui.dim" : "inherit"}>
+            {item.price || "N/A"}
+          </Td>
           <Td>
             <ActionsMenu type={"Item"} value={item} />
           </Td>
@@ -56,6 +60,7 @@ function ItemsTable() {
             <Th>ID</Th>
             <Th>Title</Th>
             <Th>Description</Th>
+            <Th>Price (£)</Th>
             <Th>Actions</Th>
           </Tr>
         </Thead>
@@ -94,6 +99,9 @@ function ItemsTable() {
 }
 
 function Items() {
+
+  const navigate = useNavigate()
+
   return (
     <Container maxW="full">
       <Heading size="lg" textAlign={{ base: "center", md: "left" }} pt={12}>
@@ -102,6 +110,22 @@ function Items() {
 
       <Navbar type={"Item"} />
       <ItemsTable />
+      <Flex
+        flexDirection="column"
+        marginTop="20px"
+        padding="12px 20px"
+      >
+
+        <Button variant="primary" size='lg' alignSelf="flex-end" onClick={() =>
+          navigate({
+            to: "/summary",
+          })
+        }
+        >
+          Summary
+        </Button>
+      </Flex>
     </Container>
+
   )
 }

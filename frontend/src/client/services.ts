@@ -2,7 +2,7 @@ import type { CancelablePromise } from './core/CancelablePromise';
 import { OpenAPI } from './core/OpenAPI';
 import { request as __request } from './core/request';
 
-import type { Body_login_login_access_token,Message,NewPassword,Token,UserPublic,UpdatePassword,UserCreate,UserRegister,UsersPublic,UserUpdate,UserUpdateMe,ItemCreate,ItemPublic,ItemsPublic,ItemUpdate } from './models';
+import type { Body_login_login_access_token,Message,NewPassword,Token,UserPublic,UpdatePassword,UserCreate,UserRegister,UsersPublic,UserUpdate,UserUpdateMe,ItemCreate,ItemPublic,ItemsPublic,ItemSummary,ItemUpdate } from './models';
 
 export type TDataLoginAccessToken = {
                 formData: Body_login_login_access_token
@@ -219,6 +219,19 @@ requestBody,
 	}
 
 	/**
+	 * Delete User Me
+	 * Delete own user.
+	 * @returns Message Successful Response
+	 * @throws ApiError
+	 */
+	public static deleteUserMe(): CancelablePromise<Message> {
+				return __request(OpenAPI, {
+			method: 'DELETE',
+			url: '/api/v1/users/me',
+		});
+	}
+
+	/**
 	 * Update User Me
 	 * Update own user.
 	 * @returns UserPublic Successful Response
@@ -392,6 +405,11 @@ export type TDataCreateItem = {
                 requestBody: ItemCreate
                 
             }
+export type TDataReadSummary = {
+                limit?: number
+skip?: number
+                
+            }
 export type TDataReadItem = {
                 id: number
                 
@@ -446,6 +464,29 @@ requestBody,
 			url: '/api/v1/items/',
 			body: requestBody,
 			mediaType: 'application/json',
+			errors: {
+				422: `Validation Error`,
+			},
+		});
+	}
+
+	/**
+	 * Read Summary
+	 * Retrieve Summary Total.
+	 * @returns ItemSummary Successful Response
+	 * @throws ApiError
+	 */
+	public static readSummary(data: TDataReadSummary = {}): CancelablePromise<ItemSummary> {
+		const {
+limit = 100,
+skip = 0,
+} = data;
+		return __request(OpenAPI, {
+			method: 'GET',
+			url: '/api/v1/items/summary',
+			query: {
+				skip, limit
+			},
 			errors: {
 				422: `Validation Error`,
 			},

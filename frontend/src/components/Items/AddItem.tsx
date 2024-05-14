@@ -97,6 +97,15 @@ const AddItem = ({ isOpen, onClose }: AddItemProps) => {
                 type="text"
               />
             </FormControl>
+            <FormControl mt={4}>
+              <FormLabel htmlFor="price">Price</FormLabel>
+              <Input
+                id="price"
+                {...register("price")}
+                placeholder="Price"
+                type="float"
+              />
+            </FormControl> 
           </ModalBody>
 
           <ModalFooter gap={3}>

@@ -61,22 +61,26 @@ class UsersPublic(SQLModel):
 class ItemBase(SQLModel):
     title: str
     description: str | None = None
+    price: float | None = None
 
 
 # Properties to receive on item creation
 class ItemCreate(ItemBase):
     title: str
+    price: float | None = None
 
 
 # Properties to receive on item update
 class ItemUpdate(ItemBase):
     title: str | None = None  # type: ignore
+    price: float | None = None
 
 
 # Database model, database table inferred from class name
 class Item(ItemBase, table=True):
     id: int | None = Field(default=None, primary_key=True)
     title: str
+    price: float | None = None
     owner_id: int | None = Field(default=None, foreign_key="user.id", nullable=False)
     owner: User | None = Relationship(back_populates="items")
 
@@ -91,6 +95,10 @@ class ItemsPublic(SQLModel):
     data: list[ItemPublic]
     count: int
 
+
+class ItemSummary(SQLModel):
+    message: str
+    sum: int
 
 # Generic message
 class Message(SQLModel):

@@ -1,16 +1,18 @@
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons"
 import {
+  Box,
   Button,
   Center,
   Container,
+  Flex,
   FormControl,
   FormErrorMessage,
   Icon,
-  Image,
   Input,
   InputGroup,
   InputRightElement,
   Link,
+  SimpleGrid,
   useBoolean,
 } from "@chakra-ui/react"
 import {
@@ -20,10 +22,11 @@ import {
 } from "@tanstack/react-router"
 import { type SubmitHandler, useForm } from "react-hook-form"
 
-import Logo from "../assets/images/fastapi-logo.svg"
+
 import type { Body_login_login_access_token as AccessToken } from "../client"
 import useAuth, { isLoggedIn } from "../hooks/useAuth"
 import { emailPattern } from "../utils"
+
 
 export const Route = createFileRoute("/login")({
   component: Login,
@@ -66,70 +69,86 @@ function Login() {
 
   return (
     <>
+      <Flex
+        flexDirection="column"
+        marginTop="20px"
+        padding="12px 20px"
+      >
+
+        <Button variant="primary" size='lg' alignSelf="flex-end" >
+          Sign Up
+        </Button>
+      </Flex>
       <Container
         as="form"
         onSubmit={handleSubmit(onSubmit)}
         h="100vh"
-        maxW="sm"
-        alignItems="stretch"
+        //maxW="sm"
+        alignItems="center"
         justifyContent="center"
         gap={4}
         centerContent
+        flexDirection="row"
       >
-        <Image
-          src={Logo}
-          alt="FastAPI logo"
-          height="auto"
-          maxW="2xs"
-          alignSelf="center"
-          mb={4}
-        />
-        <FormControl id="username" isInvalid={!!errors.username || !!error}>
-          <Input
-            id="username"
-            {...register("username", {
-              pattern: emailPattern,
-            })}
-            placeholder="Email"
-            type="email"
-            required
-          />
-          {errors.username && (
-            <FormErrorMessage>{errors.username.message}</FormErrorMessage>
-          )}
-        </FormControl>
-        <FormControl id="password" isInvalid={!!error}>
-          <InputGroup>
-            <Input
-              {...register("password")}
-              type={show ? "text" : "password"}
-              placeholder="Password"
-              required
-            />
-            <InputRightElement
-              color="ui.dim"
-              _hover={{
-                cursor: "pointer",
-              }}
-            >
-              <Icon
-                onClick={setShow.toggle}
-                aria-label={show ? "Hide password" : "Show password"}
-              >
-                {show ? <ViewOffIcon /> : <ViewIcon />}
-              </Icon>
-            </InputRightElement>
-          </InputGroup>
-          {error && <FormErrorMessage>{error}</FormErrorMessage>}
-        </FormControl>
-        <Center>
-          <Link as={RouterLink} to="/recover-password" color="blue.500">
-            Forgot password?
-          </Link>
-        </Center>
-        <Button variant="primary" type="submit" isLoading={isSubmitting}>
-          Log In
-        </Button>
+
+        <SimpleGrid columns={2} rowGap={4} columnGap={10}>
+          <Box bg='orange.500' p='40px' borderRadius="10">
+            <FormControl id="username" isInvalid={!!errors.username || !!error}>
+
+              <Input
+                id="username"
+                {...register("username", {
+                  pattern: emailPattern,
+                })}
+                placeholder="Email"
+                type="email"
+                required
+                bg="white"
+                alignItems='center'
+              />
+              {errors.username && (
+                <FormErrorMessage>{errors.username.message}</FormErrorMessage>
+              )}
+            </FormControl>
+          </Box>
+          <Box bg='orange.500' p='40px' borderRadius="10">
+            <FormControl id="password" isInvalid={!!error}>
+              <InputGroup>
+                <Input
+                  {...register("password")}
+                  type={show ? "text" : "password"}
+                  placeholder="password"
+                  required
+                  bg="white"
+                  alignItems='center'
+                />
+                <InputRightElement
+                  color="ui.dim"
+                  _hover={{
+                    cursor: "pointer",
+                  }}
+                >
+                  <Icon
+                    onClick={setShow.toggle}
+                    aria-label={show ? "Hide password" : "Show password"}
+                  >
+                    {show ? <ViewOffIcon /> : <ViewIcon />}
+                  </Icon>
+                </InputRightElement>
+              </InputGroup>
+              {error && <FormErrorMessage>{error}</FormErrorMessage>}
+            </FormControl>
+          </Box>
+          <Center>
+            <Link as={RouterLink} to="/recover-password" color="blue.500">
+              Forgot password?
+            </Link>
+          </Center>
+          <Button variant="primary" type="submit" isLoading={isSubmitting}>
+            Log In
+          </Button>
+        </SimpleGrid>
+
       </Container>
     </>
   )

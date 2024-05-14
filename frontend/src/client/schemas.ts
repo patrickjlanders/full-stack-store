@@ -65,6 +65,14 @@ export const $ItemCreate = {
 	type: 'null',
 }],
 },
+		price: {
+	type: 'any-of',
+	contains: [{
+	type: 'number',
+}, {
+	type: 'null',
+}],
+},
 	},
 } as const;
 
@@ -82,11 +90,32 @@ export const $ItemPublic = {
 	type: 'null',
 }],
 },
+		price: {
+	type: 'any-of',
+	contains: [{
+	type: 'number',
+}, {
+	type: 'null',
+}],
+},
 		id: {
 	type: 'number',
 	isRequired: true,
 },
 		owner_id: {
+	type: 'number',
+	isRequired: true,
+},
+	},
+} as const;
+
+export const $ItemSummary = {
+	properties: {
+		message: {
+	type: 'string',
+	isRequired: true,
+},
+		sum: {
 	type: 'number',
 	isRequired: true,
 },
@@ -107,6 +136,14 @@ export const $ItemUpdate = {
 	type: 'any-of',
 	contains: [{
 	type: 'string',
+}, {
+	type: 'null',
+}],
+},
+		price: {
+	type: 'any-of',
+	contains: [{
+	type: 'number',
 }, {
 	type: 'null',
 }],
