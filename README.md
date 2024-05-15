@@ -133,6 +133,14 @@ git clone https://github.com/patrickjlanders/full-stack-store.git
 cd full-stack-store
 ```
 
+- Run docker compose to start services
+
+```bash
+docker compose up -d
+```
+
+- Go to develop details below to see thr urls
+
 ### Update From the Original Template
 
 After cloning the repository, and after doing changes, you might want to get the latest changes from this original template.
