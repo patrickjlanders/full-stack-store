@@ -1,0 +1,13 @@
+# update packages
+sudo yum update -y
+# install docker - enter y when promted about size
+sudo amazon-linux-extras install docker
+# start docker service
+sudo service docker start
+# grant ec2-user ( logged in user) access to run docker commands
+sudo usermod -a -G docker ec2-user
+
+# one time: 
+mkdir downloads
+# go to downloads
+cd downloads
