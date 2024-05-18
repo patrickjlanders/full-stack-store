@@ -4,6 +4,10 @@
 
 This attempts to provide a basic design for the screens depicted in the design requirements / wireframe document:
 
+## The Site
+
+The deployed site can be found [here](https://fullstackstore.co.uk/). It is hosted on AWS EC2
+
 ## Project Stucture
 
 ```
@@ -54,12 +58,11 @@ These are there shortcuts used for this project:
     - ORM - SqlModel built on SqlAlchemy using Alembic for migrations
     - Endpoints to manage users and add items
 
-- Given above plan is to do following
+- Given above plan was to do following
     
     - Change the Theme of the react UI by overriding the theme - see frontend\src\theme.tsx
 
-
-- Chat GPT / LLMs: To get up to speed with some of the Tech used in the full stack template
+    - Use Chat GPT / LLMs: To get up to speed with some of the Tech used in the full stack template
 
 ## Assumptions
 
@@ -72,7 +75,8 @@ What assumptions were made when addressing this task:
 ## Next Steps ( still to do !!)
 
 - Styling doesn't quite reflect the design doc; font, italics etc
-- Deploying to the cloud: make sure the terraform works
+- Configure the sign-up button this is possilble by routing to the allow user registration mentioned in the DEV 
+- Ensure redirect from back button causes component to reload state. Currently requires a manual refresh after redirection 😞
 
 ## Technology Stack and Features
 

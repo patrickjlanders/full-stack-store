@@ -11,3 +11,10 @@ sudo usermod -a -G docker ec2-user
 mkdir downloads
 # go to downloads
 cd downloads
+
+
+
+
+icacls.exe pjl-kp1.pem/reset
+icacls.exe pjl-kp1.pem /grant:r "%username%:(R)"
+icacls.exe pjl-kp1.pem /inheritance:r
