@@ -14,6 +14,7 @@ import {
   Link,
   SimpleGrid,
   useBoolean,
+  useDisclosure,
 } from "@chakra-ui/react"
 import {
   Link as RouterLink,
@@ -22,6 +23,8 @@ import {
 } from "@tanstack/react-router"
 import { type SubmitHandler, useForm } from "react-hook-form"
 
+import AddUser from "../components/Admin/AddUser"
+import AddItem from "../components/Items/AddItem"
 
 import type { Body_login_login_access_token as AccessToken } from "../client"
 import useAuth, { isLoggedIn } from "../hooks/useAuth"
@@ -55,6 +58,9 @@ function Login() {
     },
   })
 
+  const addUserModal = useDisclosure()
+  const addItemModal = useDisclosure()
+
   const onSubmit: SubmitHandler<AccessToken> = async (data) => {
     if (isSubmitting) return
 
@@ -74,10 +80,17 @@ function Login() {
         marginTop="20px"
         padding="12px 20px"
       >
-
-        <Button variant="primary" size='lg' alignSelf="flex-end" >
+        <Button
+          variant="primary"
+          size='lg' alignSelf="flex-end"
+          gap={1}
+          fontSize={{ base: "sm", md: "inherit" }}
+          onClick={addUserModal.onOpen}
+        >
           Sign Up
         </Button>
+        <AddUser isOpen={addUserModal.isOpen} onClose={addUserModal.onClose} />
+        <AddItem isOpen={addItemModal.isOpen} onClose={addItemModal.onClose} />
       </Flex>
       <Container
         as="form"
